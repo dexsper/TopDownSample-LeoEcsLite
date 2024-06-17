@@ -1,21 +1,23 @@
 ﻿using Components;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using UnityEngine;
+using Services;
 
 namespace Systems
 {
     public class PlayerInputSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<UnitComponent, PlayerComponent>, Exc<RotateCommand>> _playerFilter;
+        private readonly EcsFilterInject<Inc<PlayerComponent, RotateComponent>, Exc<RotateCommand>> _playerFilter;
         private readonly EcsPoolInject<RotateCommand> _rotateCommandPool = default;
-        
+
+        private readonly EcsCustomInject<InputService> _inputService = default;
+
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _playerFilter.Value)
             {
-                ref var rotCommand = ref _rotateCommandPool.Value.Add (entity);
-                rotCommand.Value = Input.GetAxisRaw ("Horizontal");
+                ref var rotCommand = ref _rotateCommandPool.Value.Add(entity);
+                rotCommand.Value = _inputService.Value.Horizontal;
             }
         }
     }
