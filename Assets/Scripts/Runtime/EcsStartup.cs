@@ -1,6 +1,8 @@
 using AB_Utility.FromSceneToEntityConverter;
+using Components;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Leopotam.EcsLite.ExtendedSystems;
 using Services;
 using Systems;
 using UnityEngine;
@@ -14,12 +16,17 @@ public sealed class EcsStartup : MonoBehaviour
     private void Start()
     {
         var timeService = new TimeService();
+        var inputService = new InputService();
         
         _world = new EcsWorld();
         _updateSystems = new EcsSystems(_world);
         _updateSystems
             .Add(new TimeSystem())
+            .Add(new InputSystem())
+            .DelHere<RotateCommand>()
+            .DelHere<MoveCommand>()
             .Add(new PlayerInputSystem())
+            .Add(new PlayerMovementSystem())
             .Add(new UnitRotateSystem())
             .Add(new UnitRotateSyncSystem())
             .Add(new UnitFollowSystem())
@@ -27,13 +34,12 @@ public sealed class EcsStartup : MonoBehaviour
             .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
             .Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem())
 #endif
-            .Inject(timeService)
+            .Inject(timeService, inputService)
             .ConvertScene()
             .Init();
 
         _fixedUpdateSystems = new EcsSystems(_world);
         _fixedUpdateSystems
-            .Add(new PlayerMoveSystem())
             .Add(new UnitMovementSystem())
 #if UNITY_EDITOR
             .Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem())

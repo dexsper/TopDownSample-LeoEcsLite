@@ -9,7 +9,6 @@ namespace Systems
     public sealed class UnitRotateSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<UnitComponent, RotateComponent, RotateSpeed, RotateCommand>> _rotateFilter = default;
-        private readonly EcsPoolInject<RotateCommand> _rotateCommandPool = default;
         private readonly EcsCustomInject<TimeService> _timeSystem = default;
 
         public void Run(IEcsSystems systems)
@@ -24,7 +23,6 @@ namespace Systems
                 float rotationY = (rotateComponent.Value.y + rotateAmount) % 360f;
                 
                 rotateComponent.Value = rotateComponent.Value.With(y: rotationY);
-                _rotateCommandPool.Value.Del(entity);
             }
         }
     }

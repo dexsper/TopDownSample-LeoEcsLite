@@ -8,7 +8,6 @@ namespace Systems
     public class UnitMovementSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<UnitComponent, RigidbodyComponent, MoveCommand, MoveSpeed>> _moveFilter = default;
-        private readonly EcsPoolInject<MoveCommand> _moveCommandPool = default;
         
         public void Run(IEcsSystems systems)
         {
@@ -20,8 +19,6 @@ namespace Systems
 
                 Vector3 moveForce = directionComponent.Direction * (speedComponent.Value * 10f);
                 rigidbodyComponent.Value.AddForce(moveForce, ForceMode.Force);
-                
-                _moveCommandPool.Value.Del(entity);
 
                 Vector3 velocity = rigidbodyComponent.Value.velocity;
                 Vector3 flatVel = new Vector3(velocity.x, 0f, velocity.z);
