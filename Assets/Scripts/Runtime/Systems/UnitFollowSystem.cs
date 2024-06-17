@@ -7,6 +7,8 @@ namespace Systems
     public class UnitFollowSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<UnitComponent, TransformComponent>, Exc<UnitLeaderComponent, MoveCommand>> _unitsFilter = default;
+        
+        private readonly EcsWorldInject _defaultWorld = default;
         private readonly EcsPoolInject<TransformComponent> _transformsPool = default;
         private readonly EcsPoolInject<MoveCommand> _moveCommandPool = default;
         
@@ -17,13 +19,13 @@ namespace Systems
                 ref var unitComponent = ref _unitsFilter.Pools.Inc1.Get(entity);
                 ref var unitTransform = ref _unitsFilter.Pools.Inc2.Get(entity);
                 
-                if(unitComponent.LeaderId == -1)
+                if(!unitComponent.Leader.Unpack(_defaultWorld.Value, out int leaderId))
                     continue;
 
-                if (!_transformsPool.Value.Has(unitComponent.LeaderId))
+                if (!_transformsPool.Value.Has(leaderId))
                     continue;
 
-                ref var leaderTransform = ref _transformsPool.Value.Get(unitComponent.LeaderId);
+                ref var leaderTransform = ref _transformsPool.Value.Get(leaderId);
                 ref var moveCommand = ref _moveCommandPool.Value.Add (entity);
 
                 moveCommand.Direction = (leaderTransform.Value.position - unitTransform.Value.position).normalized;

@@ -1,7 +1,9 @@
-﻿namespace Components
+﻿using Leopotam.EcsLite;
+
+namespace Components
 {
     public struct UnitComponent
     {
-        public int LeaderId;
+        public EcsPackedEntity Leader;
     }
 }
