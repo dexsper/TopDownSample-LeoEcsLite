@@ -1,10 +1,11 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 
 namespace Runtime.Movement.Components
 {
     [HideLabel]
     [InlineProperty]
-    [System.Serializable]
+    [Serializable]
     public struct MoveSpeed
     {
         public float Value;

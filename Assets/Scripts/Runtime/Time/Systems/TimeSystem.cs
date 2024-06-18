@@ -11,7 +11,7 @@ namespace Runtime.Time.Systems
         {
             _timeService = timeService;
         }
-        
+
         public void Run(IEcsSystems systems)
         {
             _timeService.Time = UnityEngine.Time.time;

@@ -2,9 +2,9 @@
 {
     public sealed class TimeService
     {
-        public float Time;
-        public float DeltaTime;
-        public float UnscaledDeltaTime;
-        public float UnscaledTime;
+        public float DeltaTime { get; internal set; }
+        public float Time { get; internal set; }
+        public float UnscaledDeltaTime { get; internal set; }
+        public float UnscaledTime { get; internal set; }
     }
 }

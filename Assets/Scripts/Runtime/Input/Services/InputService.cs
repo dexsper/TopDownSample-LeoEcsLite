@@ -2,6 +2,6 @@
 {
     public class InputService
     {
-        public float Horizontal;
+        public float Horizontal { get; internal set; }
     }
 }

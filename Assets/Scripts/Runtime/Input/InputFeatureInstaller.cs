@@ -1,5 +1,4 @@
-﻿using AleVerDes.LeoEcsLiteZoo;
-using Runtime.Base;
+﻿using Runtime.Base;
 using Runtime.Input.Services;
 using Runtime.Input.Systems;
 using UnityEngine;
@@ -13,13 +12,13 @@ namespace Runtime.Input
         public override void Install(IContainerBuilder builder)
         {
             builder.Register<InputService>(Lifetime.Singleton);
-            
+
             builder.Register<InputSystem>(Lifetime.Transient);
             builder.Register<PlayerInputSystem>(Lifetime.Transient);
-            builder.Register<InputFeature>(Lifetime.Transient);
+            builder.Register<InputFeature>(Lifetime.Transient).WithParameter(_isDebug);
         }
 
-        public override IEcsFeature Get(IObjectResolver objectResolver)
+        public override BaseFeature Get(IObjectResolver objectResolver)
         {
             return objectResolver.Resolve<InputFeature>();
         }

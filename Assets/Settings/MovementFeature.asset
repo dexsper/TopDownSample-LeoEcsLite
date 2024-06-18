@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7469c8f6c62f4e8893de27a2591067e4, type: 3}
   m_Name: MovementFeature
   m_EditorClassIdentifier: 
+  _isDebug: 1

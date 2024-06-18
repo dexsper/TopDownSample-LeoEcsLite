@@ -2,16 +2,17 @@
 using Leopotam.EcsLite;
 using Runtime.Base.Components;
 using Runtime.Movement.Components;
+using UnityEngine;
 
 namespace Runtime.Movement.Systems
 {
     public class UnitRotateSyncSystem : IEcsRunSystem
     {
-        private readonly EcsQuery<UnitComponent, TransformComponent, RotateComponent> _rotateFilter = default;
+        private readonly EcsQuery<UnitComponent, UnityObjectRef<Transform>, RotateComponent> _rotateFilter = default;
 
-        private readonly EcsPool<TransformComponent> _transformPool;
         private readonly EcsPool<RotateComponent> _rotatePool;
-        
+        private readonly EcsPool<UnityObjectRef<Transform>> _transformPool;
+
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _rotateFilter)

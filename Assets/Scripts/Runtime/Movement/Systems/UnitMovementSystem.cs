@@ -1,6 +1,7 @@
 ﻿using AleVerDes.LeoEcsLiteZoo;
 using Leopotam.EcsLite;
 using Runtime.Base.Components;
+using Runtime.Input.Components;
 using Runtime.Movement.Components;
 using UnityEngine;
 
@@ -8,12 +9,12 @@ namespace Runtime.Movement.Systems
 {
     public class UnitMovementSystem : IEcsRunSystem
     {
-        private readonly EcsQuery<UnitComponent, RigidbodyComponent, MoveCommand, MoveSpeed> _moveFilter = default;
+        private readonly EcsQuery<UnitComponent, UnityObjectRef<Rigidbody>, MoveCommand, MoveSpeed> _moveFilter = default;
 
-        private readonly EcsPool<RigidbodyComponent> _rigidbodiesPool;
-        private readonly EcsPool<MoveCommand> _commandPool;
         private readonly EcsPool<MoveSpeed> _speedPool;
-        
+        private readonly EcsPool<MoveCommand> _commandPool;
+        private readonly EcsPool<UnityObjectRef<Rigidbody>> _rigidbodiesPool;
+
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _moveFilter)
@@ -22,16 +23,16 @@ namespace Runtime.Movement.Systems
                 ref var directionComponent = ref _commandPool.Get(entity);
                 ref var speedComponent = ref _speedPool.Get(entity);
 
-                Vector3 moveForce = directionComponent.Direction * (speedComponent.Value * 10f);
+                var moveForce = directionComponent.Direction * (speedComponent.Value * 10f);
                 rigidbodyComponent.Value.AddForce(moveForce, ForceMode.Force);
 
-                Vector3 velocity = rigidbodyComponent.Value.velocity;
-                Vector3 flatVel = new Vector3(velocity.x, 0f, velocity.z);
+                var velocity = rigidbodyComponent.Value.velocity;
+                var flatVel = new Vector3(velocity.x, 0f, velocity.z);
 
                 if (!(flatVel.magnitude > speedComponent.Value))
                     return;
 
-                Vector3 limitedVel = flatVel.normalized * speedComponent.Value;
+                var limitedVel = flatVel.normalized * speedComponent.Value;
                 rigidbodyComponent.Value.velocity = new Vector3(limitedVel.x, velocity.y, limitedVel.z);
             }
         }

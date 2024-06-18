@@ -11,10 +11,10 @@ namespace Runtime.Input.Systems
         {
             _inputService = inputService;
         }
-        
+
         public void Run(IEcsSystems systems)
         {
-            _inputService.Horizontal = UnityEngine.Input.GetAxisRaw ("Horizontal");
+            _inputService.Horizontal = UnityEngine.Input.GetAxisRaw("Horizontal");
         }
     }
 }

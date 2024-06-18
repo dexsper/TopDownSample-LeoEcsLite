@@ -1,4 +1,4 @@
-﻿namespace Runtime.Base.Components
+﻿namespace Runtime.Input.Components
 {
     public struct RotateCommand
     {

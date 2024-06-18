@@ -1,22 +1,22 @@
 ﻿using AleVerDes.LeoEcsLiteZoo;
 using Leopotam.EcsLite;
+using Runtime.Base;
 using Runtime.Time.Systems;
 using VContainer;
 
 namespace Runtime.Time
 {
-    public class TimeFeature : IEcsUpdateFeature
+    public class TimeFeature : BaseFeature, IEcsUpdateFeature
     {
-        private readonly IObjectResolver _objectResolver;
-
-        public TimeFeature(IObjectResolver objectResolver)
+        public TimeFeature(IObjectResolver objectResolver, bool debug) : base(objectResolver, debug)
         {
-            _objectResolver = objectResolver;
         }
-        
-        public void SetupUpdateSystems(IEcsSystems systems)
+
+        public override void SetupUpdateSystems(IEcsSystems systems)
         {
-            _objectResolver.Resolve<TimeSystem>();
+            base.SetupUpdateSystems(systems);
+            
+            systems.Add(_objectResolver.Resolve<TimeSystem>());
         }
     }
 }

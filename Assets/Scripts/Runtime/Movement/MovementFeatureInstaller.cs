@@ -1,5 +1,4 @@
-﻿using AleVerDes.LeoEcsLiteZoo;
-using Runtime.Base;
+﻿using Runtime.Base;
 using Runtime.Movement.Systems;
 using UnityEngine;
 using VContainer;
@@ -17,10 +16,10 @@ namespace Runtime.Movement
             builder.Register<UnitRotateSyncSystem>(Lifetime.Transient);
             builder.Register<UnitRotateSystem>(Lifetime.Transient);
 
-            builder.Register<MovementFeature>(Lifetime.Transient);
+            builder.Register<MovementFeature>(Lifetime.Transient).WithParameter(_isDebug);
         }
-        
-        public override IEcsFeature Get(IObjectResolver objectResolver)
+
+        public override BaseFeature Get(IObjectResolver objectResolver)
         {
             return objectResolver.Resolve<MovementFeature>();
         }

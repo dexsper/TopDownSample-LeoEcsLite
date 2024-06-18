@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af8acfabe454e839c3ab419a35b8338, type: 3}
   m_Name: TimeFeature
   m_EditorClassIdentifier: 
+  _isDebug: 1

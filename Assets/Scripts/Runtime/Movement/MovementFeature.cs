@@ -1,30 +1,32 @@
 ﻿using AleVerDes.LeoEcsLiteZoo;
 using Leopotam.EcsLite;
+using Runtime.Base;
 using Runtime.Movement.Systems;
 using VContainer;
 
 namespace Runtime.Movement
 {
-    public class MovementFeature : IEcsUpdateFeature, IEcsFixedUpdateFeature
+    public class MovementFeature : BaseFeature, IEcsUpdateFeature, IEcsFixedUpdateFeature
     {
-        private readonly IObjectResolver _objectResolver;
-
-        public MovementFeature(IObjectResolver objectResolver)
+        public MovementFeature(IObjectResolver objectResolver, bool debug) : base(objectResolver, debug)
         {
-            _objectResolver = objectResolver;
         }
-        
-        public void SetupUpdateSystems(IEcsSystems systems)
+
+        public override void SetupUpdateSystems(IEcsSystems systems)
         {
+            base.SetupUpdateSystems(systems);
+            
             systems.Add(_objectResolver.Resolve<PlayerMovementSystem>());
             systems.Add(_objectResolver.Resolve<UnitRotateSystem>());
             systems.Add(_objectResolver.Resolve<UnitRotateSyncSystem>());
             systems.Add(_objectResolver.Resolve<UnitFollowSystem>());
         }
 
-        public void SetupFixedUpdateSystems(IEcsSystems systems)
+        public override void SetupFixedUpdateSystems(IEcsSystems systems)
         {
-           systems.Add(_objectResolver.Resolve<UnitMovementSystem>());
+            base.SetupFixedUpdateSystems(systems);
+            
+            systems.Add(_objectResolver.Resolve<UnitMovementSystem>());
         }
     }
 }

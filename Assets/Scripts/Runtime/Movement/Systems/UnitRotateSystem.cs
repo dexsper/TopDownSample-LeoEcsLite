@@ -1,6 +1,7 @@
 ﻿using AleVerDes.LeoEcsLiteZoo;
 using Leopotam.EcsLite;
 using Runtime.Base.Components;
+using Runtime.Input.Components;
 using Runtime.Movement.Components;
 using Runtime.Time.Services;
 using Utils.Extensions;
@@ -9,13 +10,14 @@ namespace Runtime.Movement.Systems
 {
     public sealed class UnitRotateSystem : IEcsRunSystem
     {
-        private readonly TimeService _timeService;
-        
         private readonly EcsQuery<UnitComponent, RotateComponent, RotateSpeed, RotateCommand> _rotateFilter = default;
-        private readonly EcsPool<RotateComponent> _rotatePool;
+        
         private readonly EcsPool<RotateSpeed> _speedPool;
         private readonly EcsPool<RotateCommand> _commandPool;
+        private readonly EcsPool<RotateComponent> _rotatePool;
         
+        private readonly TimeService _timeService;
+
         public UnitRotateSystem(TimeService timeService)
         {
             _timeService = timeService;
@@ -29,9 +31,9 @@ namespace Runtime.Movement.Systems
                 ref var rotateSpeed = ref _speedPool.Get(entity);
                 ref var rotateDirection = ref _commandPool.Get(entity);
 
-                float rotateAmount = rotateDirection.Value * rotateSpeed.Value * _timeService.DeltaTime;
-                float rotationY = (rotateComponent.Value.y + rotateAmount) % 360f;
-                
+                var rotateAmount = rotateDirection.Value * rotateSpeed.Value * _timeService.DeltaTime;
+                var rotationY = (rotateComponent.Value.y + rotateAmount) % 360f;
+
                 rotateComponent.Value = rotateComponent.Value.With(y: rotationY);
             }
         }

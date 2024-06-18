@@ -15,10 +15,10 @@ namespace Runtime.Time
             builder.Register<TimeService>(Lifetime.Singleton);
             builder.Register<TimeSystem>(Lifetime.Transient);
 
-            builder.Register<TimeFeature>(Lifetime.Transient);
+            builder.Register<TimeFeature>(Lifetime.Transient).WithParameter(_isDebug);
         }
-        
-        public override IEcsFeature Get(IObjectResolver objectResolver)
+
+        public override BaseFeature Get(IObjectResolver objectResolver)
         {
             return objectResolver.Resolve<TimeFeature>();
         }
