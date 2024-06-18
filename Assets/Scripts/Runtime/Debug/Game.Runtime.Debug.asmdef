@@ -1,0 +1,21 @@
+{
+    "name": "Game.Runtime.Debug",
+    "rootNamespace": "",
+    "references": [
+        "GUID:fed2afae84a79be40adecd3b9ba807ac",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:e59bf9fc7d5a44b18a819a92edd46163",
+        "GUID:a22362b82293644e1bbe51356c008d63",
+        "GUID:a6a76476477f349309a79e5b17cf5d40",
+        "GUID:b855d2eb1b3fd4b4ebbc4aca4635fc25"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

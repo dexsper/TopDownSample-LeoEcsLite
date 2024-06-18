@@ -1,11 +1,11 @@
 {
   "dependencies": {
-    "com.anbi.leoecslite.entityconverter": {
-      "version": "https://github.com/AndreyBirchenko/LeoEcsLiteEntityConverter.git",
+    "com.aleverdes.leoecslite-zoo": {
+      "version": "https://github.com/aleverdes/leoecslite-zoo.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "d44746319696adda1379505be3e514fb324b968e"
+      "hash": "1c91e79b1ab3ef12e315aa7e66f859f727d72f8a"
     },
     "com.leopotam.ecslite": {
       "version": "https://github.com/Leopotam/ecslite.git",
@@ -13,20 +13,6 @@
       "source": "git",
       "dependencies": {},
       "hash": "5053141d7d663c6b1855c8409ac93dfac807b239"
-    },
-    "com.leopotam.ecslite.di": {
-      "version": "https://github.com/Leopotam/ecslite-di.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "99347c110c316a54c1cf2f0b268950f02612662d"
-    },
-    "com.leopotam.ecslite.extendedsystems": {
-      "version": "https://github.com/Leopotam/ecslite-extendedsystems.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "6ca6bdbb364ca43e572e524df8a8b2b2106ae994"
     },
     "com.leopotam.ecslite.unityeditor": {
       "version": "https://github.com/Leopotam/ecslite-unityeditor.git",
@@ -206,6 +192,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "jp.hadashikick.vcontainer": {
+      "version": "1.15.4",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

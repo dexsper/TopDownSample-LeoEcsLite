@@ -1,0 +1,9 @@
+{
+	"name": "Game.Runtime.Time",
+	"references": [
+		"GUID:fed2afae84a79be40adecd3b9ba807ac",
+		"GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+		"GUID:e59bf9fc7d5a44b18a819a92edd46163",
+		"GUID:a6a76476477f349309a79e5b17cf5d40"
+	]
+}
